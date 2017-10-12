@@ -1,0 +1,9 @@
+version: "2"
+
+services:
+  coding:
+    image: javascript-coding:1
+    build:
+      context: .
+    volumes:
+      - ./:/opt/app
