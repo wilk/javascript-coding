@@ -41,7 +41,26 @@ const findUnique = (list = [0]) => { // O(n) + O(n) -> O(n)
   return unique
 }
 
+/**
+ * Explanation:
+ * 1) every number XOR'd with itself, gives zero
+ * 2) every number XOR'd with zero, gives itself
+ * list is odd and there's just one unique element: the rest is made of couples
+ * so, XORing zero with every couples will give zero
+ * then, XORing zero with the unique number will give the number itself
+ */
+const findUniqueWithBitManipulation = (list = [0]) => { // O(n)
+  let value = 0
+  for (let el of list) value ^= el
+  return value
+}
+
 console.log(findUnique([0]), 'expected 0')
 console.log(findUnique([0,0,1,2,2]), 'expected 1')
 console.log(findUnique([0,0,0,0,0]), 'expected 0')
 console.log(findUnique([0,1,2,3,2,1,0]), 'expected 3')
+
+console.log(findUniqueWithBitManipulation([0]), 'expected 0')
+console.log(findUniqueWithBitManipulation([0,0,1,2,2]), 'expected 1')
+console.log(findUniqueWithBitManipulation([0,0,0,0,0]), 'expected 0')
+console.log(findUniqueWithBitManipulation([0,1,2,3,2,1,0]), 'expected 3')
