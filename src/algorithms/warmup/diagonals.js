@@ -1,3 +1,6 @@
+/**
+ * Calculate the two diagonals sums and then the absolute sum of their difference
+ */
 const n = 3,
   a = [
     [11, 2, 4],
