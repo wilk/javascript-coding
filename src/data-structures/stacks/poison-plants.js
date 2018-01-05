@@ -47,7 +47,7 @@ const poisonousPlants = plants => {
   let currentStack = [plants[0]]
   let stacks = [currentStack]
   for (let i = 1; i < plants.length; i++) {
-    if (plants[i] <= currentStack[currentStack.length - 1]) currentStack.unshift(plants[i])
+    if (plants[i] <= currentStack[currentStack.length - 1]) currentStack.push(plants[i])
     else {
       currentStack = [plants[i]]
       stacks.push(currentStack)
@@ -56,8 +56,10 @@ const poisonousPlants = plants => {
 
   let days = 0
   while (stacks.length > 1) {
-    stacks = stacks.reduce((acc, stack) => {
-      stack.pop()
+    stacks = stacks.reduce((acc, stack, index) => {
+      if (index === 0) return acc
+
+      stack.shift()
       if (stack.length > 0) acc.push(stack)
 
       return acc
@@ -75,6 +77,23 @@ const poisonousPlants = plants => {
   }
 
   return days
+
+
+  /*let days = 0
+  while (true) {
+    const livingPlants = [plants[0]]
+    for (let i = 1; i < plants.length; i++) {
+      if (plants[i] <= plants[i - 1]) livingPlants.push(plants[i])
+    }
+
+    if (plants.length === livingPlants.length) break
+    plants = livingPlants
+
+    days++
+  }
+
+  console.log(days)*/
 }
 
 console.log(poisonousPlants([6, 5, 8, 4, 7, 10, 9]))
+console.log(poisonousPlants([6, 5, 8, 7, 4, 7, 3, 1, 1, 10]))
